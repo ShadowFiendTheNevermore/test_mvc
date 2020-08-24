@@ -1,0 +1,21 @@
+{
+    "name": "shadowfiend/simple_mvc",
+    "description": "MVC free test",
+    "type": "project",
+    "license": "MIT",
+    "authors": [{
+        "name": "Sergei Bobrov",
+        "email": "pandaphotoshopdesigner@gmail.com"
+    }],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "ShadowFiend\\Core\\": "Core/",
+            "App\\": "App/"
+        }
+    },
+    "require": {
+        "vlucas/valitron": "^1.4",
+        "illuminate/database": "^7.25"
+    }
+}
