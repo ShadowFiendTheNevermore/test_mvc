@@ -3,7 +3,7 @@
 namespace ShadowFiend\Core\Router;
 
 use ShadowFiend\Core\Router\Route;
-use ShadowFiend\Core\Router\Exceptions\NotFoundException;
+use ShadowFiend\Core\Exceptions\NotFoundException;
 
 /**
  * Main router class
@@ -77,7 +77,7 @@ class Router
 
 	/**
 	 * Call route action with parameters
-	 * TODO: Try Catch BadMethodCallException
+	 * 
 	 * @param  ShadowFiend\Framework\Router\Route $route
 	 * @return callback;
 	 */
@@ -196,10 +196,12 @@ class Router
 	 */
 	private function getURI()
 	{
+		$uri = $_SERVER['REQUEST_URI'];
+
 		if (!empty($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] !== '/') {
-			return rtrim($_SERVER['REQUEST_URI'], '/');
+			$uri = rtrim($_SERVER['REQUEST_URI'], '/');
 		}
 
-		return $_SERVER['REQUEST_URI'];
+		return explode('?', $uri)[0];
 	}
 }

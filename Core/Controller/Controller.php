@@ -12,6 +12,21 @@ class Controller
 	}
 
 	/**
+	 * Return $_GET data
+	 *
+	 * @param string $key
+	 * @return void
+	 */
+	protected function get(string $key)
+	{
+		if (isset($_GET[$key])) {
+			return $this->escapeVar($_GET[$key]);
+		}
+
+		return null;
+	}
+
+	/**
 	 * Return $_POST data
 	 *
 	 * @param string $key
@@ -22,6 +37,8 @@ class Controller
 		if (isset($_POST[$key])) {
 			return $this->escapeVar($_POST[$key]);
 		}
+
+		return null;
 	}
 
 
