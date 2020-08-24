@@ -38,6 +38,10 @@ class AuthController extends Controller
 
 	public function regform()
 	{
+		if (isset($this->session()['user'])) {
+			return header('Location: /');
+		}
+
 		return View::make('auth/reg_form', ['errors' => $this->getFlashSession()['errors']]);
 	}
 
