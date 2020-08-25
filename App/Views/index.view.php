@@ -9,8 +9,8 @@
 <body>
     <?php include 'navbar.view.php' ?>
     <div class="container">
-        <?php if (count($notifications['errors'])) : ?>
-            <div class="row">
+        <?php if (count($notifications['errors']) || count($notifications['messages'])) : ?>
+            <?php if (count($notifications['errors'])) : ?>
                 <?php foreach ($notifications['errors'] as $reason => $errors) : ?>
                     <div class="alert alert-danger">
                         <?php foreach ($errors as $error) : ?>
@@ -18,10 +18,8 @@
                         <?php endforeach ?>
                     </div>
                 <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
-        <?php if (count($notifications['messages'])) : ?>
-            <div class="row">
+            <?php endif; ?>
+            <?php if (count($notifications['messages'])) : ?>
                 <?php foreach ($notifications['messages'] as $reason => $messages) : ?>
                     <div class="alert alert-danger">
                         <?php foreach ($messages as $message) : ?>
@@ -29,14 +27,14 @@
                         <?php endforeach ?>
                     </div>
                 <?php endforeach; ?>
-            </div>
+            <?php endif; ?>
         <?php endif; ?>
         <div class="row">
             <div class="col-sm-4">
                 <?php foreach ($jobs['data'] as $job) : ?>
                     <div class="card">
                         <div class="card-body">
-                            <?= $job['email'] ?>
+                            <h2><?= $job['email'] ?></h2>
                         </div>
                     </div>
                 <?php endforeach; ?>

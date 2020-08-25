@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use ShadowFiend\Core\Controller\Controller;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
@@ -14,22 +15,23 @@ class SetupController extends Controller
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('username');
+            $table->string('username')->unique();
             $table->boolean('is_admin')->default(false);
             $table->timestamps();
         });
 
         $schema->create('jobs', function ($table) {
             $table->increments('id');
-            $table->string('email')->unique();
+            $table->string('email');
+            $table->string('username');
             $table->integer('status')->default(0);
             $table->text('text')->nullable();
-            $table->integer('user_id')->unsigned();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
         });
 
-        return 'setuped';
+        $admin = User::createAdmin();
+        $admin->save();
+
+        return header('Location: /');
     }
 }

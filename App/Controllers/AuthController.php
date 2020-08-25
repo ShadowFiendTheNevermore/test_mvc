@@ -12,14 +12,13 @@ class AuthController extends Controller
 	public function login()
 	{
 		$validator = new Validator($_POST);
-		$validator->rule('required', ['email', 'password']);
-		$validator->rule('email', 'email');
+		$validator->rule('required', ['login', 'password']);
 
 		if (!$validator->validate()) {
 			return $this->validateFailed($validator->errors(), '/');
 		}
 
-		$user = User::where('email', $_POST['email'])->first();
+		$user = User::where('email', $_POST['login'])->orWhere('username', $_POST['login'])->first();
 
 		if (!$user) {
 			return $this->validateFailed([
