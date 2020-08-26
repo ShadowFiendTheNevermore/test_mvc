@@ -75,10 +75,4 @@ class AuthController extends Controller
 		$_SESSION['user'] = $user;
 		return header('Location: /');
 	}
-
-	private function validateFailed($errors, $redirect_location)
-	{
-		$_SESSION['_flash']['errors'] = $errors;
-		return header('Location:' . $redirect_location);
-	}
 }

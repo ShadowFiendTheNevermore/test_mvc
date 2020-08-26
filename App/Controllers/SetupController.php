@@ -24,7 +24,8 @@ class SetupController extends Controller
             $table->increments('id');
             $table->string('email');
             $table->string('username');
-            $table->integer('status')->default(0);
+            $table->integer('is_done')->default(0);
+            $table->integer('is_changed')->default(0);
             $table->text('text')->nullable();
             $table->timestamps();
         });

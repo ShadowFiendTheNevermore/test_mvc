@@ -26,6 +26,10 @@ $db->setAsGlobal();
 $db->bootEloquent();
 
 $app->get('/', 'MainController_Index');
+$app->get('/jobs/create', 'JobsController_createform');
+$app->post('/jobs/create', 'JobsController_create');
+$app->get('/jobs/change', 'JobsController_changeform');
+$app->post('/jobs/change', 'JobsController_change');
 $app->post('/auth/login', 'AuthController_login');
 $app->get('/auth/register', 'AuthController_regform');
 $app->post('/auth/register', 'AuthController_register');

@@ -2,6 +2,8 @@
 
 namespace ShadowFiend\Core\Controller;
 
+use ShadowFiend\Core\Exceptions\NotFoundException;
+
 class Controller
 {
 	protected $user;
@@ -69,5 +71,23 @@ class Controller
 	protected function escapeVar(string $var)
 	{
 		return htmlspecialchars($var);
+	}
+
+	protected function validateFailed($errors, $redirect_location)
+	{
+		$_SESSION['_flash']['errors'] = $errors;
+		return header('Location:' . $redirect_location);
+	}
+
+	protected function isAdmin()
+	{
+		return isset($this->session()['user']) && $this->session()['user']['is_admin'];
+	}
+
+	public function onlyAdminCheck()
+	{
+		if (!$this->isAdmin())
+			throw new NotFoundException("Only admin can do this");
+		return;
 	}
 }
