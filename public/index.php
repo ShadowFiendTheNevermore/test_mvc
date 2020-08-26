@@ -10,13 +10,15 @@ $app->setRouter(new ShadowFiend\Core\Router\Router('App\\Controllers'));
 
 $app->setDebuggable();
 
+$db_config = parse_url(getenv('JAWSDB_URL'));
+
 $db = new Capsule();
 $db->addConnection([
     'driver' => 'mysql',
-    'host' => 'localhost',
-    'database' => $_ENV['database'],
-    'username' => $_ENV['db_username'],
-    'password' => $_ENV['db_password'],
+    'host' => $db_config['host'],
+    'database' => ltrim($db_config['path'], '/'),
+    'username' => $db_config['user'],
+    'password' => $db_config['pass'],
     'charset' => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix' => '',
