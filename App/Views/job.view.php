@@ -25,14 +25,16 @@
                         <div class="form-group">
                             <textarea name="text" class="form-control" placeholder="text of job"><?php if (isset($job)) echo $job['text'] ?></textarea>
                         </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" name="is_done" type="checkbox" value="1" <?= $job['is_done'] ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="defaultCheck1">
-                                    completed
-                                </label>
+                        <?php if (isset($_SESSION['user']) && $_SESSION['user']['is_admin']) : ?>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" name="is_done" type="checkbox" value="1" <?= $job['is_done'] ? 'checked' : '' ?>>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        completed
+                                    </label>
+                                </div>
                             </div>
-                        </div>
+                        <?php endif; ?>
                         <div class="form-group">
                             <button class="btn btn-success">Сохранить</button>
                         </div>

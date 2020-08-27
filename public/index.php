@@ -10,7 +10,12 @@ $app->setRouter(new ShadowFiend\Core\Router\Router('App\\Controllers'));
 
 $app->setDebuggable();
 
-$db_config = parse_url(getenv('JAWSDB_URL'));
+$db_config = getenv('JAWSDB_URL') ? parse_url(getenv('JAWSDB_URL')) : [
+    'host' => 'localhost',
+    'path' => 'test_mvc',
+    'user' => 'homestead',
+    'pass' => 'secret',
+];
 
 $db = new Capsule();
 $db->addConnection([
