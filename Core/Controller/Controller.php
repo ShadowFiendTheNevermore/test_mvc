@@ -2,6 +2,7 @@
 
 namespace ShadowFiend\Core\Controller;
 
+use ShadowFiend\Core\Exceptions\AuthException;
 use ShadowFiend\Core\Exceptions\NotFoundException;
 
 class Controller
@@ -87,7 +88,7 @@ class Controller
 	public function onlyAdminCheck()
 	{
 		if (!$this->isAdmin())
-			throw new NotFoundException("Only admin can do this");
+			throw new AuthException("Only admin can do this");
 		return;
 	}
 }

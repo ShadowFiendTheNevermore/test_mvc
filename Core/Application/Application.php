@@ -4,6 +4,7 @@ namespace ShadowFiend\Core\Application;
 
 use ShadowFiend\Core\View\View;
 use ShadowFiend\Core\Router\Router;
+use ShadowFiend\Core\Exceptions\AuthException;
 use ShadowFiend\Core\Exceptions\NotFoundException;
 
 /**
@@ -106,6 +107,9 @@ class Application
 		} catch (\Throwable $error) {
 			if ($error instanceof NotFoundException) {
 				return View::make('errors/404');
+			} elseif ($error instanceof AuthException) {
+				$_SESSION['_flash']['errors'] = ['auth' => [$error->getMessage()]];
+				return header('Location: /');
 			} else {
 				return View::make('errors/default', [
 					'error' => $error,
