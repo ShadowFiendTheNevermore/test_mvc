@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <textarea name="text" class="form-control" placeholder="text of job"><?php if (isset($job)) echo $job['text'] ?></textarea>
                         </div>
-                        <?php if (isset($_SESSION['user']) && $_SESSION['user']['is_admin']) : ?>
+                        <?php if (isset($_SESSION['user']) && $_SESSION['user']['is_admin'] && isset($job)) : ?>
                             <div class="form-group">
                                 <div class="form-check">
                                     <input class="form-check-input" name="is_done" type="checkbox" value="1" <?= $job['is_done'] ? 'checked' : '' ?>>
